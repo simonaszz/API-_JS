@@ -1,0 +1,122 @@
+body {
+    background-color: antiquewhite;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  
+}
+
+
+
+.price {
+    font-weight: bold;
+    color: #151414;
+}
+
+.price>span {
+    color: #d90e0e;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+.product {
+    position: relative;
+    display: inline-block;
+    margin: 30px;
+    padding: 30px 36px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px #0001;
+    min-width: 220px;
+    min-height: 180px;
+    overflow: hidden;
+}
+
+/* Top border: left to right */
+.product::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: #007bff;
+    border-radius: 6px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
+    z-index: 2;
+}
+
+/* Bottom border: right to left */
+.product::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 3px;
+    width: 100%;
+    background: #007bff;
+    border-radius: 6px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
+    z-index: 2;
+}
+
+/* Left border: top to bottom */
+.border-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: #007bff;
+    border-radius: 6px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
+    z-index: 2;
+}
+
+/* Right border: bottom to top */
+.border-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 3px;
+    height: 100%;
+    background: #007bff;
+    border-radius: 6px;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
+    z-index: 2;
+}
+
+/* Hover effect – activates all borders from different corners */
+.product:hover::before {
+    transform: scaleX(1);
+}
+
+.product:hover::after {
+    transform: scaleX(1);
+}
+
+.product:hover .border-left {
+    transform: scaleY(1);
+}
+
+.product:hover .border-right {
+    transform: scaleY(1);
+}

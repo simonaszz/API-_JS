@@ -8,31 +8,20 @@ fetch('https://dummyjson.com/products')
             const productElement = document.createElement('div');
             productElement.classList.add('product');
             productElement.innerHTML = `
-            <span class="border-left"></span>
-            <span class="border-right"></span>
-                <h2>${product.title}</h2>
+                <span class="border-left"></span>
+                <span class="border-right"></span>
+                <h2 class="product-title">${product.title}</h2>
                 <img src="${product.thumbnail}" alt="${product.title}">
-               <p class="price">Price: <span>${product.price}</span></p><button class="add-to-cart">Dėti į krepšelį</button>
+                <div class="price">Kaina: <span>${product.price} €</span></div>
+                <button class="add-to-cart-btn">Dėti į krepšelį</button>
             `;
             productsContainer.appendChild(productElement);
 
-
-
-
-            const btn = productElement.querySelector('.add-to-cart');
-
+            const btn = productElement.querySelector('.add-to-cart-btn');
             btn.addEventListener('click', () => {
-                cart.push(product); // Pridedam į krepšelį
-                alert(`Pridėta į krepšelį: ${product.title}`); // Parodomas pranešimas
+                cart.push(product);
+                // ALERT galima pakeisti į krepšelio skaičiuko atnaujinimą
+                alert(`Pridėta į krepšelį: ${product.title}`);
             });
         });
     });
-
-
-
-
-
-
-
-
-

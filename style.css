@@ -1,10 +1,11 @@
-body { background-color: #f7f7f7; }
-
+body {
+    background-color: #f7f7f7;
+}
 
 #products {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.75em;
+    gap: 2.5em;
     max-width: 1600px;
     margin: 0 auto;
     padding: 20px;
@@ -12,96 +13,173 @@ body { background-color: #f7f7f7; }
 
 .product {
     position: relative;
-    gap: 1.25em; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1em;
     padding: 30px 36px;
     background: #fff;
     border-radius: 6px;
     box-shadow: 0 2px 8px #0001;
     min-width: 220px;
-    min-height: 180px;g
+    min-height: 180px;
     overflow: hidden;
     font-size: 1.2em;
     color: #151414;
     text-align: center;
-    transition: 
-      transform 0.3s cubic-bezier(.17,.67,.83,.67), 
-      box-shadow 0.3s, 
-      background 0.3s;
+    transition:
+        transform 0.3s cubic-bezier(.17, .67, .83, .67),
+        box-shadow 0.3s,
+        background 0.3s;
     z-index: 1;
 }
+
 .product:hover {
     transform: scale(1.07);
-    background: #eaf3ff;
+    background: #f4faff;
     box-shadow: 0 6px 30px #007bff40, 0 2px 8px #0001;
     z-index: 10;
 }
 
 /* Border animacija */
+.product::before,
+.product::after,
+.border-left,
+.border-right {
+    pointer-events: none;
+}
+
 .product::before {
     content: "";
     position: absolute;
-    top: 0; left: 0;
-    height: 3px; width: 100%;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
     background: #007bff;
     border-radius: 6px;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
+
 .product::after {
     content: "";
     position: absolute;
-    bottom: 0; right: 0;
-    height: 3px; width: 100%;
+    bottom: 0;
+    right: 0;
+    height: 3px;
+    width: 100%;
     background: #007bff;
     border-radius: 6px;
     transform: scaleX(0);
     transform-origin: right;
-    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
+
 .border-left {
     position: absolute;
-    left: 0; top: 0;
-    width: 3px; height: 100%;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
     background: #007bff;
     border-radius: 6px;
     transform: scaleY(0);
     transform-origin: top;
-    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
+
 .border-right {
     position: absolute;
-    right: 0; bottom: 0;
-    width: 3px; height: 100%;
+    right: 0;
+    bottom: 0;
+    width: 3px;
+    height: 100%;
     background: #007bff;
     border-radius: 6px;
     transform: scaleY(0);
     transform-origin: bottom;
-    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
-.product:hover::before { transform: scaleX(1); }
-.product:hover::after { transform: scaleX(1); }
-.product:hover .border-left { transform: scaleY(1); }
-.product:hover .border-right { transform: scaleY(1); }
 
-.price {
-    font-weight: bold;
-    color: #151414;
+.product:hover::before {
+    transform: scaleX(1);
 }
+
+.product:hover::after {
+    transform: scaleX(1);
+}
+
+.product:hover .border-left {
+    transform: scaleY(1);
+}
+
+.product:hover .border-right {
+    transform: scaleY(1);
+}
+
+/* Title produkto*/
+.product-title {
+    font-size: 1.22em;
+    font-weight: 700;
+    margin-bottom: 0.4em;
+    margin-top: 0.1em;
+    color: #212529;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+
+/* Kaina */
+.price {
+    font-size: 1.06em;
+    color: #444;
+    font-weight: 500;
+    margin: 0.5em 0 0.8em 0;
+}
+
 .price>span {
     color: #d90e0e;
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: bold;
+    margin-left: 0.18em;
 }
 
 /* WOW efektas paveikslėliui */
 .product img {
-    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
 }
+
 .product:hover img {
     transform: scale(1.10);
+}
+
+/* Mygtukas */
+.add-to-cart-btn {
+    display: inline-block;
+    min-width: 100%;
+    padding: 0.8em 2em;
+    background: linear-gradient(90deg, #007bff 60%, #339af0 100%);
+
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    border-radius: 0.5em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0001;
+    transition: background 0.22s, transform 0.18s;
+    margin-top: 0.9em;
+    letter-spacing: 0.01em;
+}
+
+.add-to-cart-btn:hover,
+.add-to-cart-btn:focus {
+    background: #0056b3;
+    transform: translateY(-2px) scale(1.07);
+    box-shadow: 0 6px 30px #007bff22, 0 2px 8px #0001;
 }

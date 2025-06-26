@@ -5,7 +5,7 @@ const cart = [];
 function loadCart() {
     const stored = localStorage.getItem('cart');
     if (stored) {
-        cart.length = 0; // išvalome masyvą (kad nedingtų nuoroda)
+        cart.length = 0;
         JSON.parse(stored).forEach(item => cart.push(item));
     }
 }
@@ -82,6 +82,7 @@ function renderCart() {
     if (cart.length === 0) {
         cartList.innerHTML = '<li>Krepšelis tuščias</li>';
         cartTotal.textContent = '';
+        document.getElementById('buy-btn').style.display = 'none';
         return;
     }
 
@@ -106,7 +107,7 @@ function renderCart() {
         `;
         cartList.appendChild(li);
 
-        // Mažinimo mygtukas ("−") – išima VIENĄ tokios prekės vienetą
+        // Mažinimo mygtukas ("−")
         li.querySelector('.minus').onclick = () => {
             const index = cart.findIndex(pr => pr.id === item.id);
             if (index !== -1) cart.splice(index, 1);
@@ -114,14 +115,14 @@ function renderCart() {
             saveCart();
             renderCart();
         };
-        // Didinimo mygtukas ("+") – prideda vieną vienetą
+        // Didinimo mygtukas ("+")
         li.querySelector('.plus').onclick = () => {
             cart.push(item);
             updateCartCount();
             saveCart();
             renderCart();
         };
-        // Šiukšliadėžės mygtukas – ištrina visas tos prekės kopijas iš cart
+        // Šiukšliadėžės mygtukas
         li.querySelector('.remove-btn').onclick = () => {
             for (let i = cart.length - 1; i >= 0; i--) {
                 if (cart[i].id === item.id) cart.splice(i, 1);
@@ -135,4 +136,15 @@ function renderCart() {
     });
 
     cartTotal.textContent = `Iš viso: ${total.toFixed(2)} €`;
+    document.getElementById('buy-btn').style.display = '';
+}
+
+// PIRKIMO MYGTUKAS – NUKREIPIA Į CHECKOUT.HTML
+const buyBtn = document.getElementById('buy-btn');
+if (buyBtn) {
+    buyBtn.addEventListener('click', () => {
+        if (cart.length === 0) return;
+        localStorage.setItem('checkout_cart', JSON.stringify(cart));
+        window.location.href = 'checkout.html';
+    });
 }

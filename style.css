@@ -1,47 +1,51 @@
+/* Puslapio fonas */
 body {
     background-color: #f7f7f7;
 }
 
+/* Pagrindinis konteineris, centras, plotis */
 .container {
-    max-width: 80%;
-    margin: 0 auto;
+    max-width: 80%;          /* riboja maksimalų plotį */
+    margin: 0 auto;          /* centruoja puslapį */
     padding: 20px;
     position: relative;
 }
 
+/* Viršutinė juosta – header */
 header {
-    position: sticky;
+    position: sticky;        /* lieka viršuje scrollinant */
     top: 0;
-    z-index: 100;
+    z-index: 100;            /* kad header būtų virš kitų elementų */
     background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex;           /* elementai vienoje eilutėje */
+    align-items: center;     /* vertikalus centruojimas */
+    justify-content: space-between; /* maksimalus tarpas tarp h1 ir krepšelio */
     min-height: 3.5em;
     margin-bottom: 1.5em;
-    box-shadow: 0 2px 12px #0001;
+    box-shadow: 0 2px 12px #0001;  /* švelnus šešėlis */
 }
 
-
+/* Produktų grid'as */
 #products {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2.5em;
+    grid-template-columns: repeat(4, 1fr); /* 4 stulpeliai */
+    gap: 2.5em;             /* tarpai tarp kortelių */
     max-width: 1600px;
     margin: 0 auto;
     padding: 20px;
 }
 
+/* Viena produkto kortelė */
 .product {
     position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.1em;
+    flex-direction: column;     /* elementai iš viršaus į apačią */
+    align-items: center;        /* centruojam horizontaliai */
+    gap: 1.1em;                 /* tarpai tarp elementų kortelėje */
     padding: 30px 36px;
     background: #fff;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px #0001;
+    border-radius: 6px;         /* užapvalinti kampai */
+    box-shadow: 0 2px 8px #0001;/* švelnus šešėlis */
     min-width: 220px;
     min-height: 180px;
     overflow: hidden;
@@ -55,43 +59,35 @@ header {
     z-index: 1;
 }
 
+/* Efektas užvedus pele ant produkto */
 .product:hover {
-    transform: scale(1.07);
-    background: #f4faff;
+    transform: scale(1.07);          /* padidina kortelę */
+    background: #f4faff;             /* šviesiai mėlynas fonas */
     box-shadow: 0 6px 30px #007bff40, 0 2px 8px #0001;
     z-index: 10;
 }
 
-/* Border animacija */
-.product::before,
-.product::after,
-.border-left,
-.border-right {
-    pointer-events: none;
+/* Produktų animuotos kraštinės (border efektas) */
+.product::before, .product::after, .border-left, .border-right {
+    pointer-events: none; /* kad nesispaustų ir neuždengtų kitų elementų */
 }
-
 .product::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 3px;
-    width: 100%;
+    top: 0; left: 0;
+    height: 3px; width: 100%;
     background: #007bff;
     border-radius: 6px;
-    transform: scaleX(0);
+    transform: scaleX(0);           /* nematoma pradžioje */
     transform-origin: left;
     transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
-
 .product::after {
     content: "";
     position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 3px;
-    width: 100%;
+    bottom: 0; right: 0;
+    height: 3px; width: 100%;
     background: #007bff;
     border-radius: 6px;
     transform: scaleX(0);
@@ -99,13 +95,10 @@ header {
     transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
-
 .border-left {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
+    left: 0; top: 0;
+    width: 3px; height: 100%;
     background: #007bff;
     border-radius: 6px;
     transform: scaleY(0);
@@ -113,13 +106,10 @@ header {
     transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
-
 .border-right {
     position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 3px;
-    height: 100%;
+    right: 0; bottom: 0;
+    width: 3px; height: 100%;
     background: #007bff;
     border-radius: 6px;
     transform: scaleY(0);
@@ -127,24 +117,12 @@ header {
     transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
+.product:hover::before { transform: scaleX(1);}
+.product:hover::after { transform: scaleX(1);}
+.product:hover .border-left { transform: scaleY(1);}
+.product:hover .border-right { transform: scaleY(1);}
 
-.product:hover::before {
-    transform: scaleX(1);
-}
-
-.product:hover::after {
-    transform: scaleX(1);
-}
-
-.product:hover .border-left {
-    transform: scaleY(1);
-}
-
-.product:hover .border-right {
-    transform: scaleY(1);
-}
-
-/* Title produkto*/
+/* Produkto pavadinimas */
 .product-title {
     font-size: 1.22em;
     font-weight: 700;
@@ -155,37 +133,34 @@ header {
     line-height: 1.2;
 }
 
-/* Kaina */
+/* Produkto kaina */
 .price {
     font-size: 1.06em;
     color: #444;
     font-weight: 500;
     margin: 0.5em 0 0.8em 0;
 }
-
 .price>span {
-    color: #d90e0e;
+    color: #d90e0e;        /* raudona kaina */
     font-size: 1.3em;
     font-weight: bold;
     margin-left: 0.18em;
 }
 
-/* WOW efektas paveikslėliui */
+/* Produkto paveikslėlis su efektu */
 .product img {
     transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
 }
-
 .product:hover img {
-    transform: scale(1.10);
+    transform: scale(1.10); /* zoom-in užvedus pelę */
 }
 
-/* Mygtukas */
+/* Pridėti į krepšelį mygtukas */
 .add-to-cart-btn {
     display: inline-block;
     min-width: 100%;
     padding: 0.8em 2em;
     background: linear-gradient(90deg, #007bff 60%, #339af0 100%);
-
     color: #fff;
     font-size: 1em;
     border: none;
@@ -197,27 +172,24 @@ header {
     margin-top: 0.9em;
     letter-spacing: 0.01em;
 }
-
 .add-to-cart-btn:hover,
 .add-to-cart-btn:focus {
     background: #0056b3;
-    transform: translateY(-2px) scale(1.07);
+    transform: translateY(-2px) scale(1.07); /* lengvai pašoka ir padidėja */
     box-shadow: 0 6px 30px #007bff22, 0 2px 8px #0001;
 }
 
-
-/* krepselis */
+/* Krepšelio indikatorius viršuje */
 #cart-info {
-    margin-left: auto;
+    margin-left: auto;   /* nustumiam į dešinę header'e */
     font-size: 1.15em;
     font-weight: 600;
     color: #007bff;
     padding: 0.85em 1.2em;
     z-index: 100;
 }
-
 #cart-info span {
-    background: #d90e0e;
+    background: #d90e0e;   /* raudonas burbuliukas */
     color: #fff;
     border-radius: 1.1em;
     padding: 0.15em 0.75em;
@@ -227,181 +199,122 @@ header {
     display: inline-block;
     transition: transform 0.28s cubic-bezier(.68, -0.55, .27, 1.55);
 }
-
-/* Animacija skaičiukui */
+/* Animacija kai įdedama prekė į krepšelį */
 #cart-count.pop {
     animation: pop 0.28s;
 }
-
 @keyframes pop {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.25);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+    0%   { transform: scale(1);}
+    50%  { transform: scale(1.25);}
+    100% { transform: scale(1);}
 }
 
-
-
-
-
+/* Responsive dizainas (telefonams, planšetėms) */
 @media (max-width: 900px) {
-    #products {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .container {
-        max-width: 99%;
-        padding: 8px;
-    }
+    #products { grid-template-columns: repeat(2, 1fr);}
+    .container { max-width: 99%; padding: 8px;}
 }
-
 @media (max-width: 600px) {
-    #products {
-        grid-template-columns: 1fr;
-        gap: 1.1em;
-    }
-
-    #cart-info {
-        font-size: 1em;
-        padding: 0.7em 0.8em;
-    }
-
-    .add-to-cart-btn {
-        font-size: 1em;
-        padding: 0.7em 0.3em;
-    }
+    #products { grid-template-columns: 1fr; gap: 1.1em;}
+    #cart-info { font-size: 1em; padding: 0.7em 0.8em;}
+    .add-to-cart-btn { font-size: 1em; padding: 0.7em 0.3em;}
 }
 @media (max-width: 500px) {
-  .modal-content {
-    padding: 1em;
-    font-size: 1em;
-    max-width: 99vw;
-  }
+    .modal-content { padding: 1em; font-size: 1em; max-width: 99vw;}
 }
 
-
-
-/* Modal fonas */
+/* Modal fonas – šešėlis už modalo lango */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0; top: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.22);
-  justify-content: center;
-  align-items: center;
-  animation: modalFadeIn 0.33s;
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.22);
+    justify-content: center;
+    align-items: center;
+    animation: modalFadeIn 0.33s;
 }
 @keyframes modalFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
-
-/* Modal turinys */
+/* Modal turinys (kortelė) */
 .modal-content {
-  background: #fff;
-  padding: 2em 2.2em 1.3em 2.2em;
-  border-radius: 18px;
-  box-shadow: 0 8px 40px #007bff33;
-  position: relative;
-  max-width: 400px;
-  min-width: 240px;
-  width: 95vw;
-  animation: modalZoomIn 0.33s;
+    background: #fff;
+    padding: 2em 2.2em 1.3em 2.2em;
+    border-radius: 18px;
+    box-shadow: 0 8px 40px #007bff33;
+    position: relative;
+    max-width: 400px;
+    min-width: 240px;
+    width: 95vw;
+    animation: modalZoomIn 0.33s;
 }
 @keyframes modalZoomIn {
-  from { transform: scale(0.85);}
-  to   { transform: scale(1);}
+    from { transform: scale(0.85);}
+    to   { transform: scale(1);}
 }
 
+/* Modal uždarymo kryžiukas */
 .close-modal {
-  position: absolute;
-  top: 0.55em;
-  right: 1em;
-  font-size: 2.1em;
-  color: #888;
-  cursor: pointer;
-  user-select: none;
-  transition: color 0.18s;
+    position: absolute;
+    top: 0.55em;
+    right: 1em;
+    font-size: 2.1em;
+    color: #888;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.18s;
 }
 .close-modal:hover { color: #d90e0e; }
 
 .modal-content h2 {
-  margin-top: 0.15em;
-  margin-bottom: 0.65em;
-  font-size: 1.25em;
-  color: #1b2235;
-  text-align: center;
-  letter-spacing: 0.01em;
+    margin-top: 0.15em;
+    margin-bottom: 0.65em;
+    font-size: 1.25em;
+    color: #1b2235;
+    text-align: center;
+    letter-spacing: 0.01em;
 }
 
-/* Krepšelio prekių sąrašas */
+/* Krepšelio prekių sąrašas modale */
 #cart-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.1em 0;
-  width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.1em 0;
+    width: 100%;
 }
-
 #cart-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.42em 0.1em;
-  border-bottom: 1px solid #f1f1f1;
-  font-size: 1.09em;
-  color: #222;
-  gap: 1.3em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.42em 0.1em;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 1.09em;
+    color: #222;
+    gap: 1.3em;
 }
+#cart-list li:last-child { border-bottom: none; }
 
-#cart-list li:last-child {
-  border-bottom: none;
-}
+/* Kiekio ir sumos blokas modale */
+.cart-item-title { flex: 2 1 0; text-align: left; font-weight: 500;}
+.cart-item-qty   { flex: 0 0 auto; color: #007bff; font-weight: 600; font-size: 1.06em; padding: 0 0.35em;}
+.cart-item-sum   { flex: 1 1 0; color: #d90e0e; font-weight: 600; text-align: right;}
 
-/* Kiekio ir sumos blokas */
-.cart-item-title {
-  flex: 2 1 0;
-  text-align: left;
-  font-weight: 500;
-}
-.cart-item-qty {
-  flex: 0 0 auto;
-  color: #007bff;
-  font-weight: 600;
-  font-size: 1.06em;
-  padding: 0 0.35em;
-}
-.cart-item-sum {
-  flex: 1 1 0;
-  color: #d90e0e;
-  font-weight: 600;
-  text-align: right;
-}
-
-/* Bendra suma */
+/* Krepšelio bendra suma */
 #cart-total {
-  margin-top: 1em;
-  font-weight: 700;
-  color: #007bff;
-  font-size: 1.13em;
-  text-align: right;
-  letter-spacing: 0.01em;
-  border-top: 1.5px solid #e4e4e4;
-  padding-top: 0.6em;
+    margin-top: 1em;
+    font-weight: 700;
+    color: #007bff;
+    font-size: 1.13em;
+    text-align: right;
+    letter-spacing: 0.01em;
+    border-top: 1.5px solid #e4e4e4;
+    padding-top: 0.6em;
 }
 
-
-
-
-/* Krepšelio modalo mygtukams */
+/* Krepšelio modalo mygtukams (plius/minus/šiukšlė) */
 .qty-btn {
     background: #eaf3ff;
     color: #007bff;
@@ -416,9 +329,7 @@ header {
     transition: background 0.19s, color 0.19s, transform 0.17s;
 }
 .qty-btn:hover { 
-    background: #007bff; 
-    color: #fff; 
-    transform: scale(1.09); 
+    background: #007bff; color: #fff; transform: scale(1.09); 
 }
 .remove-btn {
     background: #f8e0e0;
@@ -436,4 +347,93 @@ header {
     background: #d90e0e;
     color: #fff;
     transform: scale(1.09) rotate(-9deg);
+}
+
+/* Pirkti mygtukas modale ir checkout */
+.buy-btn {
+    display: block;
+    min-width: 40%;
+    margin: 1.5em auto 0 auto;
+    padding: 0.9em 2em;
+    background: linear-gradient(90deg, #32c178 60%, #5ce27f 100%);
+    color: #fff;
+    font-size: 1.15em;
+    border: none;
+    border-radius: 0.5em;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0001;
+    transition: background 0.21s, transform 0.18s;
+    letter-spacing: 0.02em;
+}
+.buy-btn:hover, .buy-btn:focus {
+    background: #19a85c;
+    transform: scale(1.06);
+}
+
+/* Checkout (pirkimo) puslapio stiliai */
+.checkout-container {
+    max-width: 520px;
+    margin: 2em auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 18px #0001;
+    padding: 2em 2.5em 2em 2.5em;
+}
+.checkout-container h2 {
+    text-align: center;
+    margin-bottom: 1.3em;
+    color: #212529;
+}
+#checkout-summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+#checkout-summary li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 1.4em;
+}
+.checkout-form input {
+    padding: 0.65em 1em;
+    border-radius: 6px;
+    border: 1px solid #bcd;
+    font-size: 1.05em;
+    background: #f6f8fa;
+}
+.checkout-form input:focus {
+    outline: 2px solid #007bff50;
+    border-color: #339af0;
+}
+.checkout-form button {
+    background: linear-gradient(90deg, #007bff 60%, #339af0 100%);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.45em;
+    padding: 0.85em 0;
+    font-size: 1.1em;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0001;
+    margin-top: 0.7em;
+    transition: background 0.18s, transform 0.17s;
+}
+.checkout-form button:hover {
+    background: #0056b3;
+    transform: scale(1.04);
+}
+.thankyou {
+    text-align: center;
+    margin: 2em 0;
+    color: #1a892d;
+    font-size: 1.33em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
 }

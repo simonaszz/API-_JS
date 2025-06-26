@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style.css" />
+    <title>Pirkimo langas | Shop API</title>
+    <link rel="stylesheet" href="checkout.css" />
+</head>
+<body style="background: #f7f7f7;">
+    <div class="checkout-container">
+        <h2>Užsakymo patvirtinimas</h2>
+        <div id="checkout-summary"></div>
+        <form class="checkout-form" id="checkout-form" autocomplete="on">
+            <input type="text" id="name" placeholder="Vardas" required>
+            <input type="email" id="email" placeholder="El. paštas" required>
+            <button type="submit">Patvirtinti pirkimą</button>
+        </form>
+    </div>
+    <script src="checkout.js" defer></script>
+</body>
+</html>

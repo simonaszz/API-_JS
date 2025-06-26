@@ -37,15 +37,24 @@ fetch('https://dummyjson.com/products')
             const productElement = document.createElement('div');
             productElement.classList.add('product');
             productElement.innerHTML = `
-                <span class="border-left"></span>
-                <span class="border-right"></span>
-                <h2 class="product-title">${product.title}</h2>
-                <img src="${product.thumbnail}" alt="${product.title}">
-                <div class="price">Kaina: <span>${product.price} €</span></div>
-                <button class="add-to-cart-btn">Dėti į krepšelį</button>
-            `;
+        <span class="border-left"></span>
+        <span class="border-right"></span>
+        <h2 class="product-title">${product.title}</h2>
+        <img src="${product.thumbnail}" alt="${product.title}">
+        <div class="price">Kaina: <span>${product.price} €</span></div>
+        <button class="add-to-cart-btn">Dėti į krepšelį</button>
+    `;
             productsContainer.appendChild(productElement);
 
+            // Click ant visos kortelės
+            productElement.addEventListener('click', function (e) {
+                // Jei paspausta ant mygtuko, NIEKO NEDAROM
+                if (e.target.classList.contains('add-to-cart-btn')) return;
+                // Peradresuojam į detalės puslapį su tos prekės id
+                window.location.href = 'preke.html?id=' + product.id;
+            });
+
+            // "Dėti į krepšelį" mygtukas
             const btn = productElement.querySelector('.add-to-cart-btn');
             btn.addEventListener('click', () => {
                 cart.push(product);       // Įdedam prekę į krepšelį
@@ -54,7 +63,6 @@ fetch('https://dummyjson.com/products')
             });
         });
     });
-
 /* KREPŠELIO MODALAS */
 
 const cartInfo = document.getElementById('cart-info');
@@ -91,7 +99,7 @@ function renderCart() {
         if (grouped[item.id]) {
             grouped[item.id].count++;
         } else {
-            grouped[item.id] = {...item, count: 1};
+            grouped[item.id] = { ...item, count: 1 };
         }
     });
 

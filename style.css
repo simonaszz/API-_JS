@@ -1,35 +1,83 @@
-/* Puslapio fonas */
+/* ============================== */
+/*           PUSLAPIO BAZĖ         */
+/* ============================== */
+
+/* Puslapio fonas ir bendras šriftas */
 body {
-    background-color: #f7f7f7;
+    background-color: #f7f7f7;         /* Švelniai pilkas fonas */
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-/* Pagrindinis konteineris, centras, plotis */
+/* Pagrindinis konteineris – riboja plotį ir centruoja turinį */
 .container {
-    max-width: 80%;          /* riboja maksimalų plotį */
-    margin: 0 auto;          /* centruoja puslapį */
+    max-width: 80%;                    /* Maksimalus plotis 80% ekrano */
+    margin: 0 auto;                    /* Centruoja automatiškai */
     padding: 20px;
     position: relative;
 }
 
-/* Viršutinė juosta – header */
+
+/* ============================== */
+/*          HEADER (VIRŠUS)       */
+/* ============================== */
+
+/* Viršutinė juosta su pavadinimu ir krepšeliu */
 header {
-    position: sticky;        /* lieka viršuje scrollinant */
+    position: sticky;                  /* Lieka viršuje slenkant puslapį */
     top: 0;
-    z-index: 100;            /* kad header būtų virš kitų elementų */
-    background: #fff;
-    display: flex;           /* elementai vienoje eilutėje */
-    align-items: center;     /* vertikalus centruojimas */
-    justify-content: space-between; /* maksimalus tarpas tarp h1 ir krepšelio */
+    z-index: 100;                      /* Užtikrina, kad visada virš kitų elementų */
+    background: #fff;                  /* Balta spalva */
+    display: flex;                     /* Išdėsto elementus vienoje eilutėje */
+    align-items: center;               /* Vertikalus lygiavimas */
+    justify-content: space-between;    /* Pavadinimas kairėje, krepšelis dešinėje */
     min-height: 3.5em;
     margin-bottom: 1.5em;
-    box-shadow: 0 2px 12px #0001;  /* švelnus šešėlis */
+    box-shadow: 0 2px 12px #0001;      /* Lengvas šešėlis */
 }
 
-/* Produktų grid'as */
+/* Krepšelio indikatorius (🛒) */
+#cart-info {
+    margin-left: auto;                 /* Pristumia prie dešinio krašto */
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #007bff;                    /* Mėlyna spalva */
+    padding: 0.85em 1.2em;
+    z-index: 100;
+}
+
+/* Raudonas burbuliukas su prekių skaičiumi */
+#cart-info span {
+    background: #d90e0e;               /* Raudona spalva */
+    color: #fff;
+    border-radius: 1.1em;              /* Apvalūs kampai */
+    padding: 0.15em 0.75em;
+    margin-left: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.28s cubic-bezier(.68, -0.55, .27, 1.55);
+}
+
+/* Kai įdedama prekė į krepšelį – trumpa "pop" animacija */
+#cart-count.pop {
+    animation: pop 0.28s;
+}
+@keyframes pop {
+    0%   { transform: scale(1);}
+    50%  { transform: scale(1.25);}
+    100% { transform: scale(1);}
+}
+
+/* ============================== */
+/*         PRODUKTŲ LENTELĖ       */
+/* ============================== */
+
+/* Produktų grid'as (kortelės tinklas) */
 #products {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 stulpeliai */
-    gap: 2.5em;             /* tarpai tarp kortelių */
+    gap: 2.5em;
     max-width: 1600px;
     margin: 0 auto;
     padding: 20px;
@@ -39,13 +87,13 @@ header {
 .product {
     position: relative;
     display: flex;
-    flex-direction: column;     /* elementai iš viršaus į apačią */
-    align-items: center;        /* centruojam horizontaliai */
-    gap: 1.1em;                 /* tarpai tarp elementų kortelėje */
+    flex-direction: column;                /* Iš viršaus į apačią */
+    align-items: center;
+    gap: 1.1em;
     padding: 30px 36px;
     background: #fff;
-    border-radius: 6px;         /* užapvalinti kampai */
-    box-shadow: 0 2px 8px #0001;/* švelnus šešėlis */
+    border-radius: 6px;
+    box-shadow: 0 2px 8px #0001;
     min-width: 220px;
     min-height: 180px;
     overflow: hidden;
@@ -58,35 +106,32 @@ header {
         background 0.3s;
     z-index: 1;
 }
-
-/* Efektas užvedus pele ant produkto */
+/* Užvedus pelę – kortelė padidėja ir tampa šviesiai mėlyna */
 .product:hover {
-    transform: scale(1.07);          /* padidina kortelę */
-    background: #f4faff;             /* šviesiai mėlynas fonas */
+    transform: scale(1.07);
+    background: #f4faff;
     box-shadow: 0 6px 30px #007bff40, 0 2px 8px #0001;
     z-index: 10;
 }
 
-/* Produktų animuotos kraštinės (border efektas) */
+/* Kraštinių animacija ant produkto */
 .product::before, .product::after, .border-left, .border-right {
-    pointer-events: none; /* kad nesispaustų ir neuždengtų kitų elementų */
+    pointer-events: none;
 }
 .product::before {
     content: "";
-    position: absolute;
-    top: 0; left: 0;
+    position: absolute; top: 0; left: 0;
     height: 3px; width: 100%;
     background: #007bff;
     border-radius: 6px;
-    transform: scaleX(0);           /* nematoma pradžioje */
+    transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
 .product::after {
     content: "";
-    position: absolute;
-    bottom: 0; right: 0;
+    position: absolute; bottom: 0; right: 0;
     height: 3px; width: 100%;
     background: #007bff;
     border-radius: 6px;
@@ -95,28 +140,25 @@ header {
     transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
     z-index: 2;
 }
-.border-left {
-    position: absolute;
-    left: 0; top: 0;
+.border-left, .border-right {
     width: 3px; height: 100%;
     background: #007bff;
     border-radius: 6px;
+    position: absolute;
+    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
+    z-index: 2;
+}
+.border-left {
+    left: 0; top: 0;
     transform: scaleY(0);
     transform-origin: top;
-    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
-    z-index: 2;
 }
 .border-right {
-    position: absolute;
     right: 0; bottom: 0;
-    width: 3px; height: 100%;
-    background: #007bff;
-    border-radius: 6px;
     transform: scaleY(0);
     transform-origin: bottom;
-    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
-    z-index: 2;
 }
+/* Kraštinių iššokimo efektas */
 .product:hover::before { transform: scaleX(1);}
 .product:hover::after { transform: scaleX(1);}
 .product:hover .border-left { transform: scaleY(1);}
@@ -133,7 +175,7 @@ header {
     line-height: 1.2;
 }
 
-/* Produkto kaina */
+/* Kaina ir išskirta kaina */
 .price {
     font-size: 1.06em;
     color: #444;
@@ -141,18 +183,18 @@ header {
     margin: 0.5em 0 0.8em 0;
 }
 .price>span {
-    color: #d90e0e;        /* raudona kaina */
+    color: #d90e0e;
     font-size: 1.3em;
     font-weight: bold;
     margin-left: 0.18em;
 }
 
-/* Produkto paveikslėlis su efektu */
+/* Produkto paveikslėlis su zoom efektu */
 .product img {
     transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
 }
 .product:hover img {
-    transform: scale(1.10); /* zoom-in užvedus pelę */
+    transform: scale(1.10);
 }
 
 /* Pridėti į krepšelį mygtukas */
@@ -175,62 +217,22 @@ header {
 .add-to-cart-btn:hover,
 .add-to-cart-btn:focus {
     background: #0056b3;
-    transform: translateY(-2px) scale(1.07); /* lengvai pašoka ir padidėja */
+    transform: translateY(-2px) scale(1.07);
     box-shadow: 0 6px 30px #007bff22, 0 2px 8px #0001;
 }
 
-/* Krepšelio indikatorius viršuje */
-#cart-info {
-    margin-left: auto;   /* nustumiam į dešinę header'e */
-    font-size: 1.15em;
-    font-weight: 600;
-    color: #007bff;
-    padding: 0.85em 1.2em;
-    z-index: 100;
-}
-#cart-info span {
-    background: #d90e0e;   /* raudonas burbuliukas */
-    color: #fff;
-    border-radius: 1.1em;
-    padding: 0.15em 0.75em;
-    margin-left: 0.5em;
-    font-size: 1em;
-    font-weight: bold;
-    display: inline-block;
-    transition: transform 0.28s cubic-bezier(.68, -0.55, .27, 1.55);
-}
-/* Animacija kai įdedama prekė į krepšelį */
-#cart-count.pop {
-    animation: pop 0.28s;
-}
-@keyframes pop {
-    0%   { transform: scale(1);}
-    50%  { transform: scale(1.25);}
-    100% { transform: scale(1);}
-}
+/* ============================== */
+/*         MODALAI (langai)       */
+/* ============================== */
 
-/* Responsive dizainas (telefonams, planšetėms) */
-@media (max-width: 900px) {
-    #products { grid-template-columns: repeat(2, 1fr);}
-    .container { max-width: 99%; padding: 8px;}
-}
-@media (max-width: 600px) {
-    #products { grid-template-columns: 1fr; gap: 1.1em;}
-    #cart-info { font-size: 1em; padding: 0.7em 0.8em;}
-    .add-to-cart-btn { font-size: 1em; padding: 0.7em 0.3em;}
-}
-@media (max-width: 500px) {
-    .modal-content { padding: 1em; font-size: 1em; max-width: 99vw;}
-}
-
-/* Modal fonas – šešėlis už modalo lango */
+/* Modal fonas – puslapiui užtemdyti */
 .modal {
     display: none;
     position: fixed;
     z-index: 9999;
     left: 0; top: 0;
     width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.22);
+    background: rgba(0,0,0,0.22);     /* skaidrus fonas */
     justify-content: center;
     align-items: center;
     animation: modalFadeIn 0.33s;
@@ -239,7 +241,8 @@ header {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
-/* Modal turinys (kortelė) */
+
+/* Modal turinys */
 .modal-content {
     background: #fff;
     padding: 2em 2.2em 1.3em 2.2em;
@@ -256,7 +259,7 @@ header {
     to   { transform: scale(1);}
 }
 
-/* Modal uždarymo kryžiukas */
+/* Modal uždarymo mygtukas */
 .close-modal {
     position: absolute;
     top: 0.55em;
@@ -278,7 +281,10 @@ header {
     letter-spacing: 0.01em;
 }
 
-/* Krepšelio prekių sąrašas modale */
+/* ============================== */
+/* KREPŠELIO MODALO SĄRAŠAS       */
+/* ============================== */
+
 #cart-list {
     list-style: none;
     padding: 0;
@@ -296,13 +302,9 @@ header {
     gap: 1.3em;
 }
 #cart-list li:last-child { border-bottom: none; }
-
-/* Kiekio ir sumos blokas modale */
 .cart-item-title { flex: 2 1 0; text-align: left; font-weight: 500;}
 .cart-item-qty   { flex: 0 0 auto; color: #007bff; font-weight: 600; font-size: 1.06em; padding: 0 0.35em;}
 .cart-item-sum   { flex: 1 1 0; color: #d90e0e; font-weight: 600; text-align: right;}
-
-/* Krepšelio bendra suma */
 #cart-total {
     margin-top: 1em;
     font-weight: 700;
@@ -313,8 +315,7 @@ header {
     border-top: 1.5px solid #e4e4e4;
     padding-top: 0.6em;
 }
-
-/* Krepšelio modalo mygtukams (plius/minus/šiukšlė) */
+/* Krepšelio mygtukai */
 .qty-btn {
     background: #eaf3ff;
     color: #007bff;
@@ -349,7 +350,7 @@ header {
     transform: scale(1.09) rotate(-9deg);
 }
 
-/* Pirkti mygtukas modale ir checkout */
+/* Pirkti mygtukas */
 .buy-btn {
     display: block;
     min-width: 40%;
@@ -371,7 +372,107 @@ header {
     transform: scale(1.06);
 }
 
-/* Checkout (pirkimo) puslapio stiliai */
+/* ============================== */
+/*      DETALIOS PREKĖS PUSLAPIS  */
+/* ============================== */
+
+/* Single product view (preke.html) */
+.single-product {
+    display: flex;
+    gap: 2.5em;
+    margin-top: 1.5em;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 20px #0001;
+    padding: 2.2em 2.5em;
+}
+.product-gallery {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.product-gallery .main-img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 1px 8px #007bff22;
+}
+.product-gallery .thumbs {
+    display: flex;
+    gap: 0.7em;
+    margin-top: 1em;
+}
+.product-gallery .thumb {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid #eaeaea;
+    transition: border 0.2s;
+}
+.product-gallery .thumb:hover {
+    border: 2px solid #007bff;
+}
+.product-info {
+    flex: 2 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.product-price span {
+    color: #d90e0e;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-left: 0.18em;
+}
+.discount {
+    color: #27a46c;
+    margin-left: 1.2em;
+    font-size: 1em;
+}
+.product-meta, .product-stock, .product-rating {
+    font-size: 1.05em;
+    margin-bottom: 0.6em;
+}
+.product-desc {
+    margin: 1.2em 0;
+    color: #333;
+    line-height: 1.5;
+}
+.reviews-block {
+    margin-top: 2em;
+    background: #f7f9fb;
+    border-radius: 8px;
+    padding: 1.1em 1.2em 1.5em 1.2em;
+}
+.reviews {
+    padding: 0;
+    list-style: none;
+}
+.reviews li {
+    margin-bottom: 0.8em;
+    padding-bottom: 0.8em;
+    border-bottom: 1px solid #e4e4e4;
+    font-size: 1em;
+}
+.reviews li:last-child { border-bottom: none; }
+.back-link {
+    display: block;
+    margin: 2em 0 0 0;
+    color: #007bff;
+    font-size: 1.1em;
+    text-decoration: none;
+}
+.back-link:hover { text-decoration: underline; }
+
+
+/* ============================== */
+/*          CHECKOUT              */
+/* ============================== */
+
 .checkout-container {
     max-width: 520px;
     margin: 2em auto;
@@ -436,4 +537,26 @@ header {
     font-size: 1.33em;
     font-weight: 700;
     letter-spacing: 0.01em;
+}
+
+/* ============================== */
+/*     RESPONSIVE MEDIA QUERY     */
+/* ============================== */
+
+/* 2 stulpeliai nuo 900px pločio */
+@media (max-width: 900px) {
+    #products { grid-template-columns: repeat(2, 1fr);}
+    .container { max-width: 99%; padding: 8px;}
+    .single-product { flex-direction: column; padding: 1em; }
+    .product-gallery .main-img { width: 170px; height: 170px;}
+}
+/* Tik 1 stulpelis nuo 600px */
+@media (max-width: 600px) {
+    #products { grid-template-columns: 1fr; gap: 1.1em;}
+    #cart-info { font-size: 1em; padding: 0.7em 0.8em;}
+    .add-to-cart-btn { font-size: 1em; padding: 0.7em 0.3em;}
+}
+/* Modal prisitaikymas ant labai mažų ekranų */
+@media (max-width: 500px) {
+    .modal-content { padding: 1em; font-size: 1em; max-width: 99vw;}
 }

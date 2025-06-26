@@ -1,129 +1,107 @@
-body {
-    background-color: antiquewhite;
-}
+body { background-color: #f7f7f7; }
 
 
- #products {
+#products {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-   
+    gap: 1.75em;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 20px; 
+    padding: 20px;
 }
 
+.product {
+    position: relative;
+    gap: 1.25em; 
+    padding: 30px 36px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px #0001;
+    min-width: 220px;
+    min-height: 180px;g
+    overflow: hidden;
+    font-size: 1.2em;
+    color: #151414;
+    text-align: center;
+    transition: 
+      transform 0.3s cubic-bezier(.17,.67,.83,.67), 
+      box-shadow 0.3s, 
+      background 0.3s;
+    z-index: 1;
+}
+.product:hover {
+    transform: scale(1.07);
+    background: #eaf3ff;
+    box-shadow: 0 6px 30px #007bff40, 0 2px 8px #0001;
+    z-index: 10;
+}
+
+/* Border animacija */
+.product::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    height: 3px; width: 100%;
+    background: #007bff;
+    border-radius: 6px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
+    z-index: 2;
+}
+.product::after {
+    content: "";
+    position: absolute;
+    bottom: 0; right: 0;
+    height: 3px; width: 100%;
+    background: #007bff;
+    border-radius: 6px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
+    z-index: 2;
+}
+.border-left {
+    position: absolute;
+    left: 0; top: 0;
+    width: 3px; height: 100%;
+    background: #007bff;
+    border-radius: 6px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
+    z-index: 2;
+}
+.border-right {
+    position: absolute;
+    right: 0; bottom: 0;
+    width: 3px; height: 100%;
+    background: #007bff;
+    border-radius: 6px;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
+    z-index: 2;
+}
+.product:hover::before { transform: scaleX(1); }
+.product:hover::after { transform: scaleX(1); }
+.product:hover .border-left { transform: scaleY(1); }
+.product:hover .border-right { transform: scaleY(1); }
 
 .price {
     font-weight: bold;
     color: #151414;
 }
-
 .price>span {
     color: #d90e0e;
     font-size: 1.5em;
     font-weight: bold;
 }
 
-
-
-
-
-
-
-
-
-
-/* 
-Border animacija */
-.product {
-
-    position: relative;
-    margin: 30px;
-    padding: 30px 36px;
-    background: #fff;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px #0001;
-    min-width: 220px;
-    min-height: 180px;
-    overflow: hidden;
+/* WOW efektas paveikslėliui */
+.product img {
+    transition: transform 0.4s cubic-bezier(.86,0,.07,1);
 }
-
-/* Top border: left to right */
-.product::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 3px;
-    width: 100%;
-    background: #007bff;
-    border-radius: 6px;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
-    z-index: 2;
-}
-
-/* Bottom border: right to left */
-.product::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 3px;
-    width: 100%;
-    background: #007bff;
-    border-radius: 6px;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
-    z-index: 2;
-}
-
-/* Left border: top to bottom */
-.border-left {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: #007bff;
-    border-radius: 6px;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
-    z-index: 2;
-}
-
-/* Right border: bottom to top */
-.border-right {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 3px;
-    height: 100%;
-    background: #007bff;
-    border-radius: 6px;
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform 0.4s cubic-bezier(.86, 0, .07, 1);
-    z-index: 2;
-}
-
-/* Hover effect – activates all borders from different corners */
-.product:hover::before {
-    transform: scaleX(1);
-}
-
-.product:hover::after {
-    transform: scaleX(1);
-}
-
-.product:hover .border-left {
-    transform: scaleY(1);
-}
-
-.product:hover .border-right {
-    transform: scaleY(1);
+.product:hover img {
+    transform: scale(1.10);
 }

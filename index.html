@@ -7,8 +7,23 @@
     <title>Shop API</title>
   </head>
   <body>
+    <div class="container">
+      <header>
+        <h1>Shop API</h1>
+        <div id="cart-info">🛒 Krepšelis: <span id="cart-count">0</span></div>
+      </header>
 
-    <div id="products"></div>
+      <div id="products"></div>
+
+      <div id="cart-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h2>Tavo krepšelis</h2>
+          <ul id="cart-list"></ul>
+          <div id="cart-total"></div>
+        </div>
+      </div>
+    </div>
 
     <script src="js.js" defer></script>
   </body>

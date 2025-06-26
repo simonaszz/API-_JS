@@ -2,6 +2,27 @@ body {
     background-color: #f7f7f7;
 }
 
+.container {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3.5em;
+    margin-bottom: 1.5em;
+    box-shadow: 0 2px 12px #0001;
+}
+
+
 #products {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -182,4 +203,237 @@ body {
     background: #0056b3;
     transform: translateY(-2px) scale(1.07);
     box-shadow: 0 6px 30px #007bff22, 0 2px 8px #0001;
+}
+
+
+/* krepselis */
+#cart-info {
+    margin-left: auto;
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #007bff;
+    padding: 0.85em 1.2em;
+    z-index: 100;
+}
+
+#cart-info span {
+    background: #d90e0e;
+    color: #fff;
+    border-radius: 1.1em;
+    padding: 0.15em 0.75em;
+    margin-left: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.28s cubic-bezier(.68, -0.55, .27, 1.55);
+}
+
+/* Animacija skaičiukui */
+#cart-count.pop {
+    animation: pop 0.28s;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+
+
+@media (max-width: 900px) {
+    #products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .container {
+        max-width: 99%;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    #products {
+        grid-template-columns: 1fr;
+        gap: 1.1em;
+    }
+
+    #cart-info {
+        font-size: 1em;
+        padding: 0.7em 0.8em;
+    }
+
+    .add-to-cart-btn {
+        font-size: 1em;
+        padding: 0.7em 0.3em;
+    }
+}
+@media (max-width: 500px) {
+  .modal-content {
+    padding: 1em;
+    font-size: 1em;
+    max-width: 99vw;
+  }
+}
+
+
+
+/* Modal fonas */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.22);
+  justify-content: center;
+  align-items: center;
+  animation: modalFadeIn 0.33s;
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Modal turinys */
+.modal-content {
+  background: #fff;
+  padding: 2em 2.2em 1.3em 2.2em;
+  border-radius: 18px;
+  box-shadow: 0 8px 40px #007bff33;
+  position: relative;
+  max-width: 400px;
+  min-width: 240px;
+  width: 95vw;
+  animation: modalZoomIn 0.33s;
+}
+@keyframes modalZoomIn {
+  from { transform: scale(0.85);}
+  to   { transform: scale(1);}
+}
+
+.close-modal {
+  position: absolute;
+  top: 0.55em;
+  right: 1em;
+  font-size: 2.1em;
+  color: #888;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.18s;
+}
+.close-modal:hover { color: #d90e0e; }
+
+.modal-content h2 {
+  margin-top: 0.15em;
+  margin-bottom: 0.65em;
+  font-size: 1.25em;
+  color: #1b2235;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+/* Krepšelio prekių sąrašas */
+#cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.1em 0;
+  width: 100%;
+}
+
+#cart-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.42em 0.1em;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 1.09em;
+  color: #222;
+  gap: 1.3em;
+}
+
+#cart-list li:last-child {
+  border-bottom: none;
+}
+
+/* Kiekio ir sumos blokas */
+.cart-item-title {
+  flex: 2 1 0;
+  text-align: left;
+  font-weight: 500;
+}
+.cart-item-qty {
+  flex: 0 0 auto;
+  color: #007bff;
+  font-weight: 600;
+  font-size: 1.06em;
+  padding: 0 0.35em;
+}
+.cart-item-sum {
+  flex: 1 1 0;
+  color: #d90e0e;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Bendra suma */
+#cart-total {
+  margin-top: 1em;
+  font-weight: 700;
+  color: #007bff;
+  font-size: 1.13em;
+  text-align: right;
+  letter-spacing: 0.01em;
+  border-top: 1.5px solid #e4e4e4;
+  padding-top: 0.6em;
+}
+
+
+
+
+/* Krepšelio modalo mygtukams */
+.qty-btn {
+    background: #eaf3ff;
+    color: #007bff;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    width: 1.8em;
+    height: 1.8em;
+    margin: 0 0.2em;
+    cursor: pointer;
+    font-size: 1.15em;
+    transition: background 0.19s, color 0.19s, transform 0.17s;
+}
+.qty-btn:hover { 
+    background: #007bff; 
+    color: #fff; 
+    transform: scale(1.09); 
+}
+.remove-btn {
+    background: #f8e0e0;
+    color: #d90e0e;
+    border: none;
+    border-radius: 50%;
+    width: 1.8em;
+    height: 1.8em;
+    font-size: 1em;
+    margin-left: 0.5em;
+    cursor: pointer;
+    transition: background 0.17s, color 0.17s, transform 0.14s;
+}
+.remove-btn:hover {
+    background: #d90e0e;
+    color: #fff;
+    transform: scale(1.09) rotate(-9deg);
 }
